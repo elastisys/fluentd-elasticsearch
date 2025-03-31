@@ -24,7 +24,7 @@
 # 3. Remove build dependencies.
 # 4. Cleanup leftover caches & files.
 
-FROM ruby:3.3.4-slim AS builder
+FROM ruby:3.1.2-slim as builder
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -39,7 +39,7 @@ RUN apt-get update && \
     echo 'gem: --no-document' >> /etc/gemrc && \
     gem install --file Gemfile
 
-FROM ruby:3.3.4-slim
+FROM ruby:3.1.2-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -64,9 +64,6 @@ RUN apt-get update && \
 
 # Expose prometheus metrics.
 EXPOSE 80
-
-#checkov:skip=CKV_DOCKER_2:We don't need Docker HEALTHCHECK in kubernetes
-#checkov:skip=CKV_DOCKER_3:root user used
 
 # Start Fluentd to pick up our config that watches Docker container logs.
 CMD ["/entrypoint.sh"]

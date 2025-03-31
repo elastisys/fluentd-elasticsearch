@@ -1,4 +1,4 @@
-# fluentd-elasticsearch
+# fluentd-elasticsaerch
 
 Docker image for fluentd-elasticsearch which was used in [Kubernetes](https://github.com/kubernetes/kubernetes).
 
