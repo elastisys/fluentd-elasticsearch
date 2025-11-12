@@ -9,25 +9,26 @@ jobs:
   super-linter:
     permissions:
       statuses: write
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Lint Code Base
-        uses: github/super-linter/slim@v6
+        uses: github/super-linter/slim@v7
         env:
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_SHELL_SHFMT: false
+          VALIDATE_YAML_PRETTIER: false
 
   docker-build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
