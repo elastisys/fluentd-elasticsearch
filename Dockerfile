@@ -24,7 +24,7 @@
 # 3. Remove build dependencies.
 # 4. Cleanup leftover caches & files.
 
-FROM ruby:3.4.5-slim AS builder
+FROM ruby:4.0.0-slim AS builder
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -39,7 +39,7 @@ RUN apt-get update && \
     echo 'gem: --no-document' >> /etc/gemrc && \
     gem install --file Gemfile
 
-FROM ruby:3.4.5-slim
+FROM ruby:4.0.0-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
