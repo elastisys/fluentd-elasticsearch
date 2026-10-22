@@ -52,7 +52,7 @@ SHELL ["/bin/bash", "-e", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3008
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends libjemalloc2 && \
+    apt-get install -y --no-install-recommends ca-certificates libjemalloc2 && \
     apt-get clean -y && \
     ulimit -n 65536 && \
     rm -rf \
@@ -60,7 +60,7 @@ RUN apt-get update && \
         /var/lib/apt/lists/* \
         /var/log/* \
         /var/tmp/* \
-        rm -rf /tmp/*
+        /tmp/*
 
 # Expose prometheus metrics.
 EXPOSE 80
