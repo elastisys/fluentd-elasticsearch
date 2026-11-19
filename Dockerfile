@@ -24,7 +24,7 @@
 # 3. Remove build dependencies.
 # 4. Cleanup leftover caches & files.
 
-FROM ruby:4.0.1-slim AS builder
+FROM ruby:4.0.10-slim AS builder
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -34,12 +34,12 @@ SHELL ["/bin/bash", "-e", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3008,DL3028
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends g++ gcc make && \
+    apt-get install -y --no-install-recommends g++ gcc make libssl-dev pkg-config && \
     rm -rf /var/lib/apt/lists/* && \
     echo 'gem: --no-document' >> /etc/gemrc && \
     gem install --file Gemfile
 
-FROM ruby:4.0.1-slim
+FROM ruby:4.0.10-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
